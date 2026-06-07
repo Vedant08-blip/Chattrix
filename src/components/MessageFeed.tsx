@@ -20,7 +20,10 @@ export const MessageFeed: React.FC<MessageFeedProps> = ({ onReplySelect }) => {
     toggleReaction,
     deleteMessage,
     editMessage,
-    communities
+    communities,
+    searchQuery,
+    setSearchQuery,
+    setUserProfileModalId
   } = useChatStore();
 
   const chatKey = viewMode === 'dms' 
@@ -28,8 +31,40 @@ export const MessageFeed: React.FC<MessageFeedProps> = ({ onReplySelect }) => {
     : `channel_${activeChannelId}`;
 
   const currentMessages = messages[chatKey] || [];
+  
+  // Filter messages based on search query
+  const filteredMessages = searchQuery
+    ? currentMessages.filter(m => m.content.toLowerCase().includes(searchQuery.toLowerCase()))
+    : currentMessages;
+
   const feedEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Escape regex helper
+  const escapeRegExp = (str: string) => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  };
+
+  // Text highlighter helper
+  const highlightText = (text: string, highlight: string) => {
+    if (!highlight.trim()) return <span>{text}</span>;
+    try {
+      const escaped = escapeRegExp(highlight);
+      const regex = new RegExp(`(${escaped})`, 'gi');
+      const parts = text.split(regex);
+      return (
+        <span>
+          {parts.map((part, i) => 
+            regex.test(part) 
+              ? <mark key={i} className="bg-[#5865f2]/40 text-yellow-200 rounded px-0.5 font-semibold">{part}</mark>
+              : part
+          )}
+        </span>
+      );
+    } catch (e) {
+      return <span>{text}</span>;
+    }
+  };
 
   // States for Editing
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
@@ -183,8 +218,19 @@ export const MessageFeed: React.FC<MessageFeedProps> = ({ onReplySelect }) => {
           </div>
 
           {/* Messages Stream */}
+          {searchQuery && (
+            <div className="mb-4 bg-[#2b2d31] p-3 rounded-md flex items-center justify-between text-xs text-[#949ba4] select-none border border-[#1f2023]/30">
+              <span>Showing search results matching "<strong className="text-[#dbdee1]">{searchQuery}</strong>" ({filteredMessages.length} found)</span>
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="text-[#5865f2] hover:underline font-semibold"
+              >
+                Clear Search
+              </button>
+            </div>
+          )}
           <div className="space-y-1">
-            {currentMessages.map((msg, index) => {
+            {filteredMessages.map((msg, index) => {
               const prevMsg = index > 0 ? currentMessages[index - 1] : null;
               const isGrouped = shouldGroup(msg, prevMsg);
               const showDateDivider = prevMsg 
@@ -303,7 +349,8 @@ export const MessageFeed: React.FC<MessageFeedProps> = ({ onReplySelect }) => {
                         <img
                           src={msg.senderId === currentUser.id ? currentUser.avatar : msg.senderAvatar}
                           alt=""
-                          className="w-10 h-10 rounded-full bg-gray-600 object-cover mt-0.5"
+                          onClick={() => setUserProfileModalId(msg.senderId)}
+                          className="w-10 h-10 rounded-full bg-gray-600 object-cover mt-0.5 cursor-pointer hover:opacity-90 transition-opacity"
                         />
                       ) : (
                         // Bouncing timestamp visible on hover for grouped consecutive messages
@@ -322,7 +369,10 @@ export const MessageFeed: React.FC<MessageFeedProps> = ({ onReplySelect }) => {
                       {/* Name & Timestamp Header */}
                       {!isGrouped && (
                         <div className="flex items-baseline gap-2 mb-0.5 select-none">
-                          <span className="font-semibold text-white hover:underline cursor-pointer text-sm">
+                          <span 
+                            onClick={() => setUserProfileModalId(msg.senderId)}
+                            className="font-semibold text-white hover:underline cursor-pointer text-sm"
+                          >
                             {msg.senderId === currentUser.id ? currentUser.name : msg.senderName}
                           </span>
                           <span className="text-[10px] text-[#949ba4]">
@@ -354,7 +404,7 @@ export const MessageFeed: React.FC<MessageFeedProps> = ({ onReplySelect }) => {
                           <p className={`text-sm break-words whitespace-pre-wrap ${
                             msg.isDeleted ? 'text-[#949ba4] italic' : 'text-[#dbdee1]'
                           }`}>
-                            {msg.content}
+                            {msg.isDeleted ? msg.content : highlightText(msg.content, searchQuery)}
                             {msg.isEdited && !msg.isDeleted && (
                               <span className="text-[10px] text-[#949ba4] ml-1 select-none">(edited)</span>
                             )}
