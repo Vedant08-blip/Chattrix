@@ -11,8 +11,7 @@ import {
   Headphones, 
   Settings, 
   PhoneOff,
-  ChevronDown,
-  Info
+  ChevronDown
 } from 'lucide-react';
 import type { Presence } from '../types';
 

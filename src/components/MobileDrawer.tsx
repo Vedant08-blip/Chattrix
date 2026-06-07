@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useChatStore } from '../store';
+import { ServerSidebar } from './ServerSidebar';
 import { Sidebar } from './Sidebar';
 import { X } from 'lucide-react';
 
@@ -40,7 +41,7 @@ export const MobileDrawer: React.FC = () => {
       />
 
       {/* Drawer content (slides in from left) */}
-      <div className="relative flex-shrink-0 w-[240px] h-full bg-[#2b2d31] flex flex-col z-10 shadow-2xl animate-in slide-in-from-left duration-300 ease-out">
+      <div className="relative flex-shrink-0 w-[312px] h-full bg-[#2b2d31] flex z-10 shadow-2xl animate-in slide-in-from-left duration-300 ease-out">
         {/* Close Button on top of sidebar */}
         <button
           onClick={() => toggleMobileSidebar(false)}
@@ -49,8 +50,9 @@ export const MobileDrawer: React.FC = () => {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Sidebar Component */}
-        <div className="w-full h-full flex flex-col">
+        {/* Sidebars inside drawer */}
+        <div className="flex h-full w-full overflow-hidden">
+          <ServerSidebar />
           <Sidebar />
         </div>
       </div>

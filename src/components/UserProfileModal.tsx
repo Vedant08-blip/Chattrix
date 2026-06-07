@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useChatStore } from '../store';
-import { X, Send, Shield, ShieldCheck, Mail } from 'lucide-react';
+import { X, Send, Shield, ShieldCheck } from 'lucide-react';
 import type { Presence } from '../types';
 
 export const UserProfileModal: React.FC = () => {

@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { ServerSidebar } from './components/ServerSidebar';
 import { Sidebar } from './components/Sidebar';
 import { ChatHeader } from './components/ChatHeader';
 import { MessageFeed } from './components/MessageFeed';
 import { MessageInput } from './components/MessageInput';
 import { RightPanel } from './components/RightPanel';
 import { MobileDrawer } from './components/MobileDrawer';
+import { SettingsModal } from './components/SettingsModal';
+import { UserProfileModal } from './components/UserProfileModal';
 import type { Message } from './types';
 
 function App() {
@@ -19,12 +22,19 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#1e1f22] text-[#dbdee1] font-sans antialiased">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#1e1f22] text-[#dbdee1] font-sans antialiased relative">
+      {/* Settings Modal Customizer overlay */}
+      <SettingsModal />
+
+      {/* User Profile popover card overlay */}
+      <UserProfileModal />
+
       {/* Mobile Drawer (visible for screen widths < 768px) */}
       <MobileDrawer />
 
-      {/* Desktop Left Sidebar (visible for screen widths >= 768px) */}
+      {/* Desktop Left Sidebars (visible for screen widths >= 768px) */}
       <div className="hidden md:flex h-full flex-shrink-0">
+        <ServerSidebar />
         <Sidebar />
       </div>
 
