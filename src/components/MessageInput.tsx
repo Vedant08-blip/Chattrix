@@ -172,14 +172,13 @@ export const MessageInput: React.FC<MessageInputProps> = ({ replyMessage, onCanc
         </div>
       )}
 
-      {/* Main input wrapper */}
-      <div className={`bg-[#383a40] rounded-lg border border-transparent focus-within:border-[#5865f2] transition-colors overflow-hidden ${
+      <div className={`bg-[#383a40] rounded-lg border border-transparent focus-within:border-[#5865f2] transition-colors relative ${
         isLocked ? 'opacity-60 bg-[#2b2d31] border border-[#1f2023] cursor-not-allowed' : ''
       }`}>
         
         {/* Attached File Preview Tag */}
         {attachedFile && (
-          <div className="px-4 py-3 bg-[#2f3136] border-b border-[#232428] flex items-center justify-between text-sm text-[#dbdee1]">
+          <div className="px-4 py-3 bg-[#2f3136] border-b border-[#232428] flex items-center justify-between text-sm text-[#dbdee1] rounded-t-lg">
             <div className="flex items-center gap-2.5 truncate">
               {attachedFile.type.startsWith('image') ? (
                 <Image className="w-5 h-5 text-[#b5bac1] flex-shrink-0" />
