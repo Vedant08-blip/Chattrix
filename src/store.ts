@@ -235,7 +235,6 @@ const mockCommunities: Community[] = [
   }
 ];
 
-// Seed initial messages
 const getInitialMessages = (): { [key: string]: Message[] } => {
   const messages: { [chatKey: string]: Message[] } = {};
 
@@ -411,6 +410,170 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     }
   ];
 
+  // 4. DMs: Dave
+  messages['dm_dave'] = [
+    {
+      id: 'dd1',
+      senderId: 'dave',
+      senderName: 'Dave',
+      senderAvatar: mockUsers['dave'].avatar,
+      content: 'Hey! Let me know if you need Admin permissions on the Gamer Zone server.',
+      timestamp: '2026-06-07T10:00:00Z',
+      replyTo: null,
+      reactions: []
+    },
+    {
+      id: 'dd2',
+      senderId: 'me',
+      senderName: 'You',
+      senderAvatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=me',
+      content: 'Yes, please! I want to configure the announcements layout.',
+      timestamp: '2026-06-07T10:05:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
+  // 5. DMs: Eve
+  messages['dm_eve'] = [
+    {
+      id: 'de1',
+      senderId: 'eve',
+      senderName: 'Eve',
+      senderAvatar: mockUsers['eve'].avatar,
+      content: 'Did you check out React 19 compiler yet? It automatically memoizes components under the hood.',
+      timestamp: '2026-06-07T15:22:00Z',
+      replyTo: null,
+      reactions: [{ emoji: '🔥', count: 1, userIds: ['me'] }]
+    }
+  ];
+
+  // 6. DMs: Frank
+  messages['dm_frank'] = [
+    {
+      id: 'df1',
+      senderId: 'frank',
+      senderName: 'Frank',
+      senderAvatar: mockUsers['frank'].avatar,
+      content: 'Hey, did you want to play Minecraft or Valorant tonight with the squad?',
+      timestamp: '2026-06-07T16:40:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
+  // 7. DMs: Grace
+  messages['dm_grace'] = [
+    {
+      id: 'dg_1',
+      senderId: 'grace',
+      senderName: 'Grace',
+      senderAvatar: mockUsers['grace'].avatar,
+      content: 'Hi! Let me know if you want to pair program on the CSS themes later today.',
+      timestamp: '2026-06-07T12:00:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
+  // 8. DMs: Heidi
+  messages['dm_heidi'] = [
+    {
+      id: 'dh_h1',
+      senderId: 'heidi',
+      senderName: 'Heidi',
+      senderAvatar: mockUsers['heidi'].avatar,
+      content: 'Are we doing a standup meeting tomorrow morning for the project review?',
+      timestamp: '2026-06-07T17:10:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
+  // 9. DMs: Ivan
+  messages['dm_ivan'] = [
+    {
+      id: 'di1',
+      senderId: 'ivan',
+      senderName: 'Ivan',
+      senderAvatar: mockUsers['ivan'].avatar,
+      content: 'Sent you the project documents over email. Take a look when you get a chance.',
+      timestamp: '2026-06-06T14:00:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
+  // 10. DMs: Judy
+  messages['dm_judy'] = [
+    {
+      id: 'dj_u1',
+      senderId: 'judy',
+      senderName: 'Judy',
+      senderAvatar: mockUsers['judy'].avatar,
+      content: 'Thanks for explaining the Tailwind v4 setup! It worked perfectly.',
+      timestamp: '2026-06-07T11:00:00Z',
+      replyTo: null,
+      reactions: [{ emoji: '👍', count: 1, userIds: ['me'] }]
+    }
+  ];
+
+  // 11. DMs: Mallory
+  messages['dm_mallory'] = [
+    {
+      id: 'dm_m1',
+      senderId: 'mallory',
+      senderName: 'Mallory',
+      senderAvatar: mockUsers['mallory'].avatar,
+      content: 'Hey, someone reported spam in #random-memes. I deleted it.',
+      timestamp: '2026-06-07T13:45:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
+  // 12. DMs: Trent
+  messages['dm_trent'] = [
+    {
+      id: 'dt1',
+      senderId: 'trent',
+      senderName: 'Trent',
+      senderAvatar: mockUsers['trent'].avatar,
+      content: 'Any updates on the Valorant tournament brackets?',
+      timestamp: '2026-06-07T18:15:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
+  // 13. DMs: Peggy
+  messages['dm_peggy'] = [
+    {
+      id: 'dp1',
+      senderId: 'peggy',
+      senderName: 'Peggy',
+      senderAvatar: mockUsers['peggy'].avatar,
+      content: 'Hey! Nice retake clip you shared earlier in #clips-and-highlights.',
+      timestamp: '2026-06-07T17:50:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
+  // 14. DMs: Sybil
+  messages['dm_sybil'] = [
+    {
+      id: 'ds1',
+      senderId: 'sybil',
+      senderName: 'Sybil',
+      senderAvatar: mockUsers['sybil'].avatar,
+      content: 'Let\'s queue ranked together tonight, I am playing controller/smokes.',
+      timestamp: '2026-06-07T15:30:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
   // Bot DM Initial Message
   messages['dm_chattrix_bot'] = [
     {
@@ -425,7 +588,7 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     }
   ];
 
-  // 4. Communities -> Developer Hangout -> welcome-rules (Announcements, locked)
+  // 15. Communities -> Developer Hangout -> welcome-rules (Announcements, locked)
   messages['dh_welcome'] = [
     {
       id: 'dw1',
@@ -446,10 +609,20 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
       timestamp: '2026-06-05T08:05:00Z',
       replyTo: null,
       reactions: [{ emoji: '✅', count: 4, userIds: ['alice', 'charlie', 'eve', 'grace'] }]
+    },
+    {
+      id: 'dw3',
+      senderId: 'charlie',
+      senderName: 'Charlie',
+      senderAvatar: mockUsers['charlie'].avatar,
+      content: '🔔 **Roles Info:** Go to #general-chat and message any moderator to get your specialized language role badges (e.g. React, Python, C++, Go)!',
+      timestamp: '2026-06-06T12:00:00Z',
+      replyTo: null,
+      reactions: [{ emoji: '🌟', count: 3, userIds: ['alice', 'heidi', 'judy'] }]
     }
   ];
 
-  // 5. Communities -> Developer Hangout -> general-chat
+  // 16. Communities -> Developer Hangout -> general-chat
   messages['dh_general'] = [
     {
       id: 'dg1',
@@ -534,10 +707,20 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
       timestamp: '2026-06-07T09:12:00Z',
       replyTo: null,
       reactions: []
+    },
+    {
+      id: 'dg9',
+      senderId: 'alice',
+      senderName: 'Alice',
+      senderAvatar: mockUsers['alice'].avatar,
+      content: 'Awesome. Thanks for the heads up, Eve!',
+      timestamp: '2026-06-07T09:15:00Z',
+      replyTo: null,
+      reactions: [{ emoji: '🙌', count: 2, userIds: ['eve', 'me'] }]
     }
   ];
 
-  // 6. Communities -> Developer Hangout -> react-vite
+  // 17. Communities -> Developer Hangout -> react-vite
   messages['dh_react_vite'] = [
     {
       id: 'drv1',
@@ -592,10 +775,20 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
       timestamp: '2026-06-07T10:25:00Z',
       replyTo: null,
       reactions: []
+    },
+    {
+      id: 'drv6',
+      senderId: 'me',
+      senderName: 'You',
+      senderAvatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=me',
+      content: 'Exactly, v4 simplifies the styling toolchain significantly.',
+      timestamp: '2026-06-07T10:30:00Z',
+      replyTo: null,
+      reactions: []
     }
   ];
 
-  // 7. Communities -> Developer Hangout -> random-memes
+  // 18. Communities -> Developer Hangout -> random-memes
   messages['dh_random'] = [
     {
       id: 'drm1',
@@ -632,10 +825,20 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
         size: '89 KB',
         type: 'image/jpeg'
       }
+    },
+    {
+      id: 'drm4',
+      senderId: 'charlie',
+      senderName: 'Charlie',
+      senderAvatar: mockUsers['charlie'].avatar,
+      content: 'CSS is always full of surprises! 📦',
+      timestamp: '2026-06-07T12:20:00Z',
+      replyTo: null,
+      reactions: [{ emoji: '💯', count: 1, userIds: ['me'] }]
     }
   ];
 
-  // 8. Communities -> Gamer Zone -> announcements
+  // 19. Communities -> Gamer Zone -> announcements
   messages['gz_announcements'] = [
     {
       id: 'ga1',
@@ -646,10 +849,20 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
       timestamp: '2026-06-06T18:00:00Z',
       replyTo: null,
       reactions: [{ emoji: '🎮', count: 6, userIds: ['alice', 'bob', 'frank', 'peggy', 'sybil', 'eve'] }]
+    },
+    {
+      id: 'ga2',
+      senderId: 'mallory',
+      senderName: 'Mallory',
+      senderAvatar: mockUsers['mallory'].avatar,
+      content: '🏆 **Congratulations to Squad Omega!** \nThey dominated yesterday\'s Minecraft build battle finals. Check out their creations in #clips-and-highlights!',
+      timestamp: '2026-06-07T10:00:00Z',
+      replyTo: null,
+      reactions: [{ emoji: '👑', count: 4, userIds: ['peggy', 'bob', 'trent', 'sybil'] }]
     }
   ];
 
-  // 9. Communities -> Gamer Zone -> lfg-chat
+  // 20. Communities -> Gamer Zone -> lfg-chat
   messages['gz_lfg'] = [
     {
       id: 'gl1',
@@ -684,10 +897,20 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
         content: 'LFG Valorant Comp. Need 2 players. Currently gold/plat lobbies. Drop IDs.'
       },
       reactions: [{ emoji: '👍', count: 1, userIds: ['frank'] }]
+    },
+    {
+      id: 'gl4',
+      senderId: 'eve',
+      senderName: 'Eve',
+      senderAvatar: mockUsers['eve'].avatar,
+      content: 'I can jump on in about 30 minutes if you guys still have space.',
+      timestamp: '2026-06-07T15:15:00Z',
+      replyTo: null,
+      reactions: []
     }
   ];
 
-  // 10. Communities -> Gamer Zone -> clips
+  // 21. Communities -> Gamer Zone -> clips
   messages['gz_clips'] = [
     {
       id: 'gc1',
@@ -704,6 +927,16 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
         size: '4.2 MB',
         type: 'video/mp4'
       }
+    },
+    {
+      id: 'gc2',
+      senderId: 'frank',
+      senderName: 'Frank',
+      senderAvatar: mockUsers['frank'].avatar,
+      content: 'Insane aim! That last headshot was pure reflex.',
+      timestamp: '2026-06-07T16:10:00Z',
+      replyTo: null,
+      reactions: [{ emoji: '🤝', count: 2, userIds: ['peggy', 'bob'] }]
     }
   ];
 
