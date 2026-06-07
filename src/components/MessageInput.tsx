@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useChatStore } from '../store';
 import type { Message, FileAttachment } from '../types';
-import { Plus, Smile, Send, X, FileText, Image, Film, Lock } from 'lucide-react';
+import { Plus, Smile, Send, X, FileText, Image, Film, Lock, MapPin } from 'lucide-react';
 
 interface MessageInputProps {
   replyMessage: Message | null;
@@ -34,6 +34,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({ replyMessage, onCanc
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const emojiRef = useRef<HTMLDivElement>(null);
   const fileMenuRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Close menus on outside click
   useEffect(() => {
@@ -111,31 +112,48 @@ export const MessageInput: React.FC<MessageInputProps> = ({ replyMessage, onCanc
     }
   };
 
-  // Mock File Selection options
-  const mockFiles: FileAttachment[] = [
-    {
-      name: 'bug_screenshot.png',
-      url: 'https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=300&q=80',
-      size: '342 KB',
-      type: 'image/png'
-    },
-    {
-      name: 'react_state_diagram.pdf',
-      url: '#',
-      size: '1.4 MB',
-      type: 'application/pdf'
-    },
-    {
-      name: 'clutch_gameplay.mp4',
-      url: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80',
-      size: '15.8 MB',
-      type: 'video/mp4'
-    }
-  ];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-  const handleAttachFile = (file: FileAttachment) => {
-    setAttachedFile(file);
+    let sizeStr = '';
+    if (file.size < 1024 * 1024) {
+      sizeStr = `${(file.size / 1024).toFixed(1)} KB`;
+    } else {
+      sizeStr = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+
+    setAttachedFile({
+      name: file.name,
+      url: objectUrl,
+      size: sizeStr,
+      type: file.type
+    });
+
+    e.target.value = '';
+  };
+
+  const handleShareLocation = () => {
     setIsFileMenuOpen(false);
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser.");
+      return;
+    }
+
+    sendMessage("📍 Retrieving location details...", null);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+        sendMessage(`📍 Shared Location: ${mapsUrl} (Latitude: ${latitude.toFixed(4)}, Longitude: ${longitude.toFixed(4)})`, null);
+      },
+      (error) => {
+        sendMessage(`❌ Location sharing failed: ${error.message}`, null);
+      }
+    );
   };
 
   // Emojis for picker
@@ -205,6 +223,12 @@ export const MessageInput: React.FC<MessageInputProps> = ({ replyMessage, onCanc
           {/* File Attach Button */}
           {!isLocked ? (
             <div className="relative" ref={fileMenuRef}>
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                onChange={handleFileChange} 
+                className="hidden" 
+              />
               <button
                 onClick={() => setIsFileMenuOpen(!isFileMenuOpen)}
                 className="mt-1 flex items-center justify-center w-6 h-6 rounded-full bg-[#4e5058] hover:bg-[#6d6f78] text-[#dbdee1] transition-colors focus:outline-none"
@@ -213,29 +237,25 @@ export const MessageInput: React.FC<MessageInputProps> = ({ replyMessage, onCanc
               </button>
 
               {isFileMenuOpen && (
-                <div className="absolute bottom-9 left-0 bg-[#2b2d31] border border-[#1f2023] rounded-lg shadow-xl py-1 w-56 z-30 select-none text-left">
-                  <div className="px-3 py-1.5 text-[10px] font-bold text-[#949ba4] uppercase tracking-wider border-b border-[#232428]/40">
-                    Upload Mock File
-                  </div>
-                  {mockFiles.map(file => (
-                    <button
-                      key={file.name}
-                      onClick={() => handleAttachFile(file)}
-                      className="w-full px-3 py-2 text-xs text-[#dbdee1] hover:bg-[#35373c] flex items-center gap-2 transition-colors text-left"
-                    >
-                      {file.type.startsWith('image') ? (
-                        <Image className="w-3.5 h-3.5 text-[#949ba4]" />
-                      ) : file.type.startsWith('video') ? (
-                        <Film className="w-3.5 h-3.5 text-[#949ba4]" />
-                      ) : (
-                        <FileText className="w-3.5 h-3.5 text-[#949ba4]" />
-                      )}
-                      <div className="truncate flex-1">
-                        <div className="truncate font-semibold">{file.name}</div>
-                        <div className="text-[9px] text-[#949ba4]">{file.size}</div>
-                      </div>
-                    </button>
-                  ))}
+                <div className="absolute bottom-9 left-0 bg-[#2b2d31] border border-[#1f2023] rounded-lg shadow-xl py-1.5 w-48 z-30 select-none text-left animate-in slide-in-from-bottom-2 duration-100">
+                  <button
+                    onClick={() => {
+                      if (fileInputRef.current) fileInputRef.current.click();
+                      setIsFileMenuOpen(false);
+                    }}
+                    className="w-full px-3 py-2 text-xs text-[#dbdee1] hover:bg-[#35373c] flex items-center gap-2 transition-colors text-left"
+                  >
+                    <Image className="w-3.5 h-3.5 text-[#949ba4]" />
+                    <span className="font-semibold">Upload File / Image</span>
+                  </button>
+
+                  <button
+                    onClick={handleShareLocation}
+                    className="w-full px-3 py-2 text-xs text-[#dbdee1] hover:bg-[#35373c] flex items-center gap-2 transition-colors text-left border-t border-[#232428]/40"
+                  >
+                    <MapPin className="w-3.5 h-3.5 text-[#949ba4]" />
+                    <span className="font-semibold">Share Live Location</span>
+                  </button>
                 </div>
               )}
             </div>
