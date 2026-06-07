@@ -36,9 +36,13 @@ interface AppState {
   // Typing indicators: chatKey -> array of user IDs typing
   typingUsers: { [chatKey: string]: string[] };
 
+  // Themes & Screensharing
+  theme: 'dark' | 'amoled-black' | 'forest-moss' | 'crimson-night';
+  isScreensharing: boolean;
+
   // Actions
   selectDM: (userId: string) => void;
-  selectCommunity: (communityId: string) => void;
+  selectCommunity: (communityId: void | string) => void;
   selectChannel: (channelId: string) => void;
   setHomeView: () => void;
 
@@ -60,6 +64,8 @@ interface AppState {
   setUserProfileModalId: (userId: string | null) => void;
   setSettingsModalOpen: (isOpen: boolean) => void;
   updateUserProfile: (name: string, statusText: string, avatar: string) => void;
+  setTheme: (theme: 'dark' | 'amoled-black' | 'forest-moss' | 'crimson-night') => void;
+  toggleScreenshare: () => void;
 }
 
 // Helper to generate IDs
@@ -67,6 +73,15 @@ const uuid = () => Math.random().toString(36).substring(2, 9);
 
 // Mock Users
 const mockUsers: { [id: string]: User } = {
+  'chattrix_bot': {
+    id: 'chattrix_bot',
+    name: 'ChattrixBot',
+    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=ChattrixBot',
+    presence: 'online',
+    statusText: 'AI Assistant 🤖',
+    mutualServers: ['Developer Hangout', 'Gamer Zone'],
+    role: 'Admin'
+  },
   'alice': {
     id: 'alice',
     name: 'Alice',
@@ -396,6 +411,20 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     }
   ];
 
+  // Bot DM Initial Message
+  messages['dm_chattrix_bot'] = [
+    {
+      id: 'dbot1',
+      senderId: 'chattrix_bot',
+      senderName: 'ChattrixBot',
+      senderAvatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=ChattrixBot',
+      content: 'Hello! I am ChattrixBot, your AI chat assistant! Ask me anything, or test out my features. Type a message or mention me with @ChattrixBot in any channel!',
+      timestamp: '2026-06-07T18:00:00Z',
+      replyTo: null,
+      reactions: []
+    }
+  ];
+
   // 4. Communities -> Developer Hangout -> welcome-rules (Announcements, locked)
   messages['dh_welcome'] = [
     {
@@ -685,11 +714,12 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
 const initialUnreads: { [key: string]: number } = {
   'dm_alice': 2,
   'dm_charlie': 1,
+  'dm_chattrix_bot': 1,
   'channel_dh_general': 3,
   'channel_gz_lfg': 1
 };
 
-export const useChatStore = create<AppState>((set) => ({
+export const useChatStore = create<AppState>((set, get) => ({
   currentUser: {
     id: 'me',
     name: 'You',
@@ -718,6 +748,9 @@ export const useChatStore = create<AppState>((set) => ({
   messages: getInitialMessages(),
   unreadCounts: initialUnreads,
   typingUsers: {},
+
+  theme: 'dark',
+  isScreensharing: false,
 
   selectDM: (userId) => set((state) => {
     const chatKey = `dm_${userId}`;
@@ -770,7 +803,8 @@ export const useChatStore = create<AppState>((set) => ({
     isMobileSidebarOpen: false
   }),
 
-  sendMessage: (content, replyTo, file) => set((state) => {
+  sendMessage: (content, replyTo, file) => {
+    const state = get();
     const chatKey = state.viewMode === 'dms' 
       ? `dm_${state.activeDMId}` 
       : `channel_${state.activeChannelId}`;
@@ -792,13 +826,82 @@ export const useChatStore = create<AppState>((set) => ({
     };
 
     const threadMessages = state.messages[chatKey] || [];
-    return {
+    set({
       messages: {
         ...state.messages,
         [chatKey]: [...threadMessages, newMessage]
       }
-    };
-  }),
+    });
+
+    // Check if we need to reply via bot
+    const isBotDM = state.viewMode === 'dms' && state.activeDMId === 'chattrix_bot';
+    const isBotMention = state.viewMode === 'community' && (
+      content.toLowerCase().includes('@chattrixbot')
+    );
+
+    if (isBotDM || isBotMention) {
+      // Set typing state after delay
+      setTimeout(() => {
+        set((s) => {
+          const currentTypers = s.typingUsers[chatKey] || [];
+          if (!currentTypers.includes('chattrix_bot')) {
+            return {
+              typingUsers: {
+                ...s.typingUsers,
+                [chatKey]: [...currentTypers, 'chattrix_bot']
+              }
+            };
+          }
+          return {};
+        });
+      }, 500);
+
+      // Send bot reply after another delay
+      setTimeout(() => {
+        // Turn off typing
+        set((s) => ({
+          typingUsers: {
+            ...s.typingUsers,
+            [chatKey]: (s.typingUsers[chatKey] || []).filter(id => id !== 'chattrix_bot')
+          }
+        }));
+
+        // Pick random witty reply
+        const replies = [
+          "Hello! I am ChattrixBot. Did you know you can customize Nitro themes? Go to User Settings -> Appearance to switch them! 🎨",
+          "Beep boop! 🤖 The screenshare feed is rendering a custom 3D wireframe cube on an HTML5 canvas right now!",
+          "I am online and ready to help. Try out our Web Audio soundboard in the voice channel bar to play retro synthesizers! 🎺",
+          "This Discord clone is looking pretty amazing, isn't it? Try selecting AMOLED Black for a sleek dark view. 💻",
+          "Need a quick sound check? Quack, Ding, Airhorn, or Siren - pick one on the soundboard! 🦆",
+          "I'm designed entirely in CSS and React. Low latency, zero backend overhead! ⚡",
+          "That is very interesting. Let's head over to the voice lounge channel and do some pair programming! 🎙️",
+          "Ping! Let me know if you need help with anything else in Chattrix. 🚀"
+        ];
+        const randomReply = replies[Math.floor(Math.random() * replies.length)];
+
+        const botMessage: Message = {
+          id: uuid(),
+          senderId: 'chattrix_bot',
+          senderName: 'ChattrixBot',
+          senderAvatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=ChattrixBot',
+          content: randomReply,
+          timestamp: new Date().toISOString(),
+          replyTo: null,
+          reactions: []
+        };
+
+        set((s) => {
+          const currentMsgs = s.messages[chatKey] || [];
+          return {
+            messages: {
+              ...s.messages,
+              [chatKey]: [...currentMsgs, botMessage]
+            }
+          };
+        });
+      }, 2000);
+    }
+  },
 
   editMessage: (messageId, content) => set((state) => {
     const chatKey = state.viewMode === 'dms' 
@@ -970,5 +1073,7 @@ export const useChatStore = create<AppState>((set) => ({
       avatar,
       statusText
     }
-  }))
+  })),
+  setTheme: (theme) => set({ theme }),
+  toggleScreenshare: () => set((state) => ({ isScreensharing: !state.isScreensharing }))
 }));
