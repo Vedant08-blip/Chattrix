@@ -42,7 +42,7 @@ interface AppState {
 
   // Actions
   selectDM: (userId: string) => void;
-  selectCommunity: (communityId: void | string) => void;
+  selectCommunity: (communityId: string) => void;
   selectChannel: (channelId: string) => void;
   setHomeView: () => void;
 

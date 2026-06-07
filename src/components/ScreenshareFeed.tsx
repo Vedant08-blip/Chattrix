@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useChatStore } from '../store';
-import { Tv, MonitorOff, Play, ShieldAlert } from 'lucide-react';
+import { Tv, MonitorOff } from 'lucide-react';
 
 export const ScreenshareFeed: React.FC = () => {
   const { isScreensharing, toggleScreenshare } = useChatStore();
