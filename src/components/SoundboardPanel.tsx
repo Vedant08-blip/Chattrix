@@ -1,6 +1,6 @@
 import React from 'react';
 import { useChatStore } from '../store';
-import { Volume2, Sparkles, AlertCircle, VolumeX } from 'lucide-react';
+import { Sparkles, AlertCircle } from 'lucide-react';
 
 interface SoundboardPanelProps {
   onClose: () => void;
