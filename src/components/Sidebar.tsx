@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useChatStore } from '../store';
 import { 
   MessageSquare, 
@@ -11,9 +11,12 @@ import {
   Headphones, 
   Settings, 
   PhoneOff,
-  ChevronDown
+  ChevronDown,
+  Monitor,
+  Music
 } from 'lucide-react';
 import type { Presence } from '../types';
+import { SoundboardPanel } from './SoundboardPanel';
 
 export const Sidebar: React.FC = () => {
   const {
@@ -28,15 +31,19 @@ export const Sidebar: React.FC = () => {
     unreadCounts,
     isMuted,
     isDeafened,
+    isScreensharing,
     selectDM,
     selectChannel,
     connectVoice,
     disconnectVoice,
     toggleMute,
     toggleDeafen,
+    toggleScreenshare,
     setSettingsModalOpen,
     setUserProfileModalId
   } = useChatStore();
+
+  const [isSoundboardOpen, setIsSoundboardOpen] = useState(false);
 
   const getPresenceColor = (presence: Presence) => {
     switch (presence) {
@@ -279,7 +286,11 @@ export const Sidebar: React.FC = () => {
 
       {/* Voice Connection Status Overlay Panel */}
       {activeVoiceChannelId && (
-        <div className="p-3 bg-[#232428] border-t border-[#1f2023] flex flex-col gap-2">
+        <div className="relative p-3 bg-[#232428] border-t border-[#1f2023] flex flex-col gap-2">
+          {isSoundboardOpen && (
+            <SoundboardPanel onClose={() => setIsSoundboardOpen(false)} />
+          )}
+
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 min-w-0">
               {/* Green bouncing voice level bars */}
@@ -305,6 +316,35 @@ export const Sidebar: React.FC = () => {
               className="p-1.5 rounded-full hover:bg-red-500/10 text-[#f23f43] hover:text-red-500 transition-colors focus:outline-none flex-shrink-0"
             >
               <PhoneOff className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Screenshare & Soundboard triggers */}
+          <div className="flex items-center justify-between border-t border-[#1f2023]/40 pt-2 mt-1 gap-2">
+            <button
+              onClick={toggleScreenshare}
+              title={isScreensharing ? "Stop Screensharing" : "Share Screen"}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded text-[11px] font-bold transition-colors focus:outline-none ${
+                isScreensharing 
+                  ? 'bg-[#23a55a] text-white hover:bg-[#1a7f43]' 
+                  : 'bg-[#2b2d31] hover:bg-[#35373c] text-[#dbdee1]'
+              }`}
+            >
+              <Monitor className="w-3.5 h-3.5" />
+              <span>{isScreensharing ? "Sharing" : "Screen"}</span>
+            </button>
+
+            <button
+              onClick={() => setIsSoundboardOpen(!isSoundboardOpen)}
+              title="Open Soundboard"
+              className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded text-[11px] font-bold transition-colors focus:outline-none ${
+                isSoundboardOpen 
+                  ? 'bg-[#5865f2] text-white hover:bg-[#4752c4]' 
+                  : 'bg-[#2b2d31] hover:bg-[#35373c] text-[#dbdee1]'
+              }`}
+            >
+              <Music className="w-3.5 h-3.5" />
+              <span>Soundboard</span>
             </button>
           </div>
         </div>

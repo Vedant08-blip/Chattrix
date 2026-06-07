@@ -8,9 +8,12 @@ import { RightPanel } from './components/RightPanel';
 import { MobileDrawer } from './components/MobileDrawer';
 import { SettingsModal } from './components/SettingsModal';
 import { UserProfileModal } from './components/UserProfileModal';
+import { ScreenshareFeed } from './components/ScreenshareFeed';
+import { useChatStore } from './store';
 import type { Message } from './types';
 
 function App() {
+  const { theme } = useChatStore();
   const [replyMessage, setReplyMessage] = useState<Message | null>(null);
 
   const handleReplySelect = (message: Message) => {
@@ -22,7 +25,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#1e1f22] text-[#dbdee1] font-sans antialiased relative">
+    <div className={`flex h-screen w-screen overflow-hidden bg-[#1e1f22] text-[#dbdee1] font-sans antialiased relative theme-${theme}`}>
       {/* Settings Modal Customizer overlay */}
       <SettingsModal />
 
@@ -47,6 +50,7 @@ function App() {
         <div className="flex-1 flex min-h-0 min-w-0 relative">
           {/* Scrollable messages container and keyboard input */}
           <div className="flex-1 flex flex-col min-w-0 h-full border-r border-[#1f2023]/20">
+            <ScreenshareFeed />
             <MessageFeed onReplySelect={handleReplySelect} />
             <MessageInput 
               replyMessage={replyMessage} 
@@ -65,3 +69,4 @@ function App() {
 }
 
 export default App;
+
