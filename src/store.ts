@@ -85,7 +85,7 @@ const mockUsers: { [id: string]: User } = {
   'ananya': {
     id: 'ananya',
     name: 'Ananya',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya&facialHairProbability=0',
     presence: 'online',
     statusText: 'Coding React apps! 💻',
     mutualServers: ['Developer Hangout', 'Gamer Zone'],
@@ -121,7 +121,7 @@ const mockUsers: { [id: string]: User } = {
   'isha': {
     id: 'isha',
     name: 'Isha',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Isha',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Isha&facialHairProbability=0',
     presence: 'offline',
     statusText: 'Offline - Back tomorrow',
     mutualServers: ['Developer Hangout', 'Gamer Zone'],
@@ -139,15 +139,15 @@ const mockUsers: { [id: string]: User } = {
   'gauri': {
     id: 'gauri',
     name: 'Gauri',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gauri',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gauri&facialHairProbability=0',
     presence: 'online',
     mutualServers: ['Developer Hangout'],
     role: 'Member'
   },
-  'harsh': {
-    id: 'harsh',
-    name: 'Harsh',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Harsh',
+  'harshita': {
+    id: 'harshita',
+    name: 'Harshita',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Harshita&facialHairProbability=0',
     presence: 'idle',
     mutualServers: ['Developer Hangout'],
     role: 'Member'
@@ -163,40 +163,40 @@ const mockUsers: { [id: string]: User } = {
   'jyoti': {
     id: 'jyoti',
     name: 'Jyoti',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jyoti',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jyoti&facialHairProbability=0',
     presence: 'online',
     mutualServers: ['Developer Hangout'],
     role: 'Member'
   },
-  'manish': {
-    id: 'manish',
-    name: 'Manish',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Manish',
+  'meera': {
+    id: 'meera',
+    name: 'Meera',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Meera&facialHairProbability=0',
     presence: 'idle',
     statusText: 'Moderating the community',
     mutualServers: ['Gamer Zone'],
     role: 'Mod'
   },
-  'tanvi': {
-    id: 'tanvi',
-    name: 'Tanvi',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tanvi',
+  'tushar': {
+    id: 'tushar',
+    name: 'Tushar',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tushar',
     presence: 'offline',
     mutualServers: ['Gamer Zone'],
     role: 'Member'
   },
-  'pranav': {
-    id: 'pranav',
-    name: 'Pranav',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Pranav',
+  'prisha': {
+    id: 'prisha',
+    name: 'Prisha',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Prisha&facialHairProbability=0',
     presence: 'idle',
     mutualServers: ['Gamer Zone'],
     role: 'Member'
   },
-  'siddharth': {
-    id: 'siddharth',
-    name: 'Siddharth',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Siddharth',
+  'sneha': {
+    id: 'sneha',
+    name: 'Sneha',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha&facialHairProbability=0',
     presence: 'dnd',
     mutualServers: ['Gamer Zone'],
     role: 'Member'
@@ -218,7 +218,7 @@ const mockCommunities: Community[] = [
       { id: 'dh_gaming', name: 'Gaming Room 🎮', type: 'voice', description: 'Hop in to play games together while coding.' },
       { id: 'dh_pair', name: 'Pair Programming 💻', type: 'voice', description: 'Collaborate and review code with screenshare.' }
     ],
-    members: ['devansh', 'ananya', 'rohan', 'isha', 'farhan', 'gauri', 'harsh', 'ishaan', 'jyoti']
+    members: ['devansh', 'ananya', 'rohan', 'isha', 'farhan', 'gauri', 'harshita', 'ishaan', 'jyoti']
   },
   {
     id: 'gamer_zone',
@@ -231,7 +231,7 @@ const mockCommunities: Community[] = [
       { id: 'gz_voice', name: 'General Voice 🔊', type: 'voice', description: 'Hang out and voice chat about anything gaming.' },
       { id: 'gz_squad', name: 'Squad Up 🔫', type: 'voice', description: 'In-game comms for active tournament lobbies.' }
     ],
-    members: ['manish', 'ananya', 'kabir', 'isha', 'farhan', 'tanvi', 'pranav', 'siddharth']
+    members: ['meera', 'ananya', 'kabir', 'isha', 'farhan', 'tushar', 'prisha', 'sneha']
   }
 ];
 
@@ -476,13 +476,13 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     }
   ];
 
-  // 8. DMs: Harsh
+  // 8. DMs: Harshita
   messages['dm_heidi'] = [
     {
       id: 'dh_h1',
-      senderId: 'harsh',
-      senderName: 'Harsh',
-      senderAvatar: mockUsers['harsh'].avatar,
+      senderId: 'harshita',
+      senderName: 'Harshita',
+      senderAvatar: mockUsers['harshita'].avatar,
       content: 'Are we doing a standup meeting tomorrow morning for the project review?',
       timestamp: '2026-06-07T17:10:00Z',
       replyTo: null,
@@ -518,13 +518,13 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     }
   ];
 
-  // 11. DMs: Manish
+  // 11. DMs: Meera
   messages['dm_mallory'] = [
     {
       id: 'dm_m1',
-      senderId: 'manish',
-      senderName: 'Manish',
-      senderAvatar: mockUsers['manish'].avatar,
+      senderId: 'meera',
+      senderName: 'Meera',
+      senderAvatar: mockUsers['meera'].avatar,
       content: 'Hey, someone reported spam in #random-memes. I deleted it.',
       timestamp: '2026-06-07T13:45:00Z',
       replyTo: null,
@@ -532,13 +532,13 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     }
   ];
 
-  // 12. DMs: Tanvi
+  // 12. DMs: Tushar
   messages['dm_trent'] = [
     {
       id: 'dt1',
-      senderId: 'tanvi',
-      senderName: 'Tanvi',
-      senderAvatar: mockUsers['tanvi'].avatar,
+      senderId: 'tushar',
+      senderName: 'Tushar',
+      senderAvatar: mockUsers['tushar'].avatar,
       content: 'Any updates on the Valorant tournament brackets?',
       timestamp: '2026-06-07T18:15:00Z',
       replyTo: null,
@@ -546,13 +546,13 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     }
   ];
 
-  // 13. DMs: Pranav
+  // 13. DMs: Prisha
   messages['dm_peggy'] = [
     {
       id: 'dp1',
-      senderId: 'pranav',
-      senderName: 'Pranav',
-      senderAvatar: mockUsers['pranav'].avatar,
+      senderId: 'prisha',
+      senderName: 'Prisha',
+      senderAvatar: mockUsers['prisha'].avatar,
       content: 'Hey! Nice retake clip you shared earlier in #clips-and-highlights.',
       timestamp: '2026-06-07T17:50:00Z',
       replyTo: null,
@@ -560,13 +560,13 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     }
   ];
 
-  // 14. DMs: Siddharth
+  // 14. DMs: Sneha
   messages['dm_sybil'] = [
     {
       id: 'ds1',
-      senderId: 'siddharth',
-      senderName: 'Siddharth',
-      senderAvatar: mockUsers['siddharth'].avatar,
+      senderId: 'sneha',
+      senderName: 'Sneha',
+      senderAvatar: mockUsers['sneha'].avatar,
       content: 'Let\'s queue ranked together tonight, I am playing controller/smokes.',
       timestamp: '2026-06-07T15:30:00Z',
       replyTo: null,
@@ -618,7 +618,7 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
       content: '🔔 **Roles Info:** Go to #general-chat and message any moderator to get your specialized language role badges (e.g. React, Python, C++, Go)!',
       timestamp: '2026-06-06T12:00:00Z',
       replyTo: null,
-      reactions: [{ emoji: '🌟', count: 3, userIds: ['ananya', 'harsh', 'jyoti'] }]
+      reactions: [{ emoji: '🌟', count: 3, userIds: ['ananya', 'harshita', 'jyoti'] }]
     }
   ];
 
@@ -680,9 +680,9 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     },
     {
       id: 'dg6',
-      senderId: 'harsh',
-      senderName: 'Harsh',
-      senderAvatar: mockUsers['harsh'].avatar,
+      senderId: 'harshita',
+      senderName: 'Harshita',
+      senderAvatar: mockUsers['harshita'].avatar,
       content: 'That is a lifesaver. Caching was driving me crazy on my dynamic dashboard routes.',
       timestamp: '2026-06-07T08:47:10Z',
       replyTo: null,
@@ -842,23 +842,23 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
   messages['gz_announcements'] = [
     {
       id: 'ga1',
-      senderId: 'manish',
-      senderName: 'Manish',
-      senderAvatar: mockUsers['manish'].avatar,
+      senderId: 'meera',
+      senderName: 'Meera',
+      senderAvatar: mockUsers['meera'].avatar,
       content: '📢 **Valorant 5v5 Tournament Incoming!** \nRegistration opens this Wednesday. Grab your squads and sign up in #lfg-chat. Prizes include discord nitro and server champion role badges.',
       timestamp: '2026-06-06T18:00:00Z',
       replyTo: null,
-      reactions: [{ emoji: '🎮', count: 6, userIds: ['ananya', 'kabir', 'farhan', 'pranav', 'siddharth', 'isha'] }]
+      reactions: [{ emoji: '🎮', count: 6, userIds: ['ananya', 'kabir', 'farhan', 'prisha', 'sneha', 'isha'] }]
     },
     {
       id: 'ga2',
-      senderId: 'manish',
-      senderName: 'Manish',
-      senderAvatar: mockUsers['manish'].avatar,
+      senderId: 'meera',
+      senderName: 'Meera',
+      senderAvatar: mockUsers['meera'].avatar,
       content: '🏆 **Congratulations to Squad Omega!** \nThey dominated yesterday\'s Minecraft build battle finals. Check out their creations in #clips-and-highlights!',
       timestamp: '2026-06-07T10:00:00Z',
       replyTo: null,
-      reactions: [{ emoji: '👑', count: 4, userIds: ['pranav', 'kabir', 'tanvi', 'siddharth'] }]
+      reactions: [{ emoji: '👑', count: 4, userIds: ['prisha', 'kabir', 'tushar', 'sneha'] }]
     }
   ];
 
@@ -886,9 +886,9 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
     },
     {
       id: 'gl3',
-      senderId: 'siddharth',
-      senderName: 'Siddharth',
-      senderAvatar: mockUsers['siddharth'].avatar,
+      senderId: 'sneha',
+      senderName: 'Sneha',
+      senderAvatar: mockUsers['sneha'].avatar,
       content: 'I\'m down if you still need one. Playing initiator/smokes.',
       timestamp: '2026-06-07T15:08:12Z',
       replyTo: {
@@ -914,13 +914,13 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
   messages['gz_clips'] = [
     {
       id: 'gc1',
-      senderId: 'pranav',
-      senderName: 'Pranav',
-      senderAvatar: mockUsers['pranav'].avatar,
+      senderId: 'prisha',
+      senderName: 'Prisha',
+      senderAvatar: mockUsers['prisha'].avatar,
       content: 'Check out this 1v4 clutch in my ranked match today! Standard site retake.',
       timestamp: '2026-06-07T16:00:00Z',
       replyTo: null,
-      reactions: [{ emoji: '🔥', count: 3, userIds: ['kabir', 'farhan', 'siddharth'] }],
+      reactions: [{ emoji: '🔥', count: 3, userIds: ['kabir', 'farhan', 'sneha'] }],
       fileAttachment: {
         name: 'val_clutch_clip.mp4',
         url: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80',
@@ -936,7 +936,7 @@ const getInitialMessages = (): { [key: string]: Message[] } => {
       content: 'Insane aim! That last headshot was pure reflex.',
       timestamp: '2026-06-07T16:10:00Z',
       replyTo: null,
-      reactions: [{ emoji: '🤝', count: 2, userIds: ['pranav', 'kabir'] }]
+      reactions: [{ emoji: '🤝', count: 2, userIds: ['prisha', 'kabir'] }]
     }
   ];
 
