@@ -85,7 +85,7 @@ const mockUsers: { [id: string]: User } = {
   'ananya': {
     id: 'ananya',
     name: 'Ananya',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya&facialHairProbability=0&topType=longButNotTooLong,straightAndStrand,straight2,straight,curly,dreads,frida,bun,bob',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya&facialHairProbability=0&topType=longHairBigHair,longHairBob,longHairBun,longHairCurly,longHairCurvy,longHairDreads,longHairFrida,longHairFro,longHairFroBand,longHairNotTooLong,longHairMiaWallace,longHairStraight,longHairStraight2,longHairStraightStrand',
     presence: 'online',
     statusText: 'Coding React apps! 💻',
     mutualServers: ['Developer Hangout', 'Gamer Zone'],
@@ -94,7 +94,7 @@ const mockUsers: { [id: string]: User } = {
   'kabir': {
     id: 'kabir',
     name: 'Kabir',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kabir&topType=shortHair,sides,shavedSides,frizzle,shortWaved,dreads01,dreads02',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kabir&topType=shortHairDreads01,shortHairDreads02,shortHairFrizzle,shortHairShaggy,shortHairShaggyMullet,shortHairShortCurly,shortHairShortFlat,shortHairShortRound,shortHairShortWashed,shortHairSides,shortHairTheCaesar,shortHairTheCaesarSidePart',
     presence: 'idle',
     statusText: 'AFK eating pizza... 🍕',
     mutualServers: ['Gamer Zone'],
@@ -103,7 +103,7 @@ const mockUsers: { [id: string]: User } = {
   'rohan': {
     id: 'rohan',
     name: 'Rohan',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rohan&topType=shortHair,sides,shavedSides,frizzle,shortWaved,dreads01,dreads02',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rohan&topType=shortHairDreads01,shortHairDreads02,shortHairFrizzle,shortHairShaggy,shortHairShaggyMullet,shortHairShortCurly,shortHairShortFlat,shortHairShortRound,shortHairShortWashed,shortHairSides,shortHairTheCaesar,shortHairTheCaesarSidePart',
     presence: 'dnd',
     statusText: 'DND - In a client meeting',
     mutualServers: ['Developer Hangout'],
@@ -112,7 +112,7 @@ const mockUsers: { [id: string]: User } = {
   'devansh': {
     id: 'devansh',
     name: 'Devansh',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Devansh&topType=shortHair,sides,shavedSides,frizzle,shortWaved,dreads01,dreads02',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Devansh&topType=shortHairDreads01,shortHairDreads02,shortHairFrizzle,shortHairShaggy,shortHairShaggyMullet,shortHairShortCurly,shortHairShortFlat,shortHairShortRound,shortHairShortWashed,shortHairSides,shortHairTheCaesar,shortHairTheCaesarSidePart',
     presence: 'online',
     statusText: 'Ping me for server issues',
     mutualServers: ['Developer Hangout'],
@@ -121,7 +121,7 @@ const mockUsers: { [id: string]: User } = {
   'isha': {
     id: 'isha',
     name: 'Isha',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Isha&facialHairProbability=0&topType=longButNotTooLong,straightAndStrand,straight2,straight,curly,dreads,frida,bun,bob',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Isha&facialHairProbability=0&topType=longHairBigHair,longHairBob,longHairBun,longHairCurly,longHairCurvy,longHairDreads,longHairFrida,longHairFro,longHairFroBand,longHairNotTooLong,longHairMiaWallace,longHairStraight,longHairStraight2,longHairStraightStrand',
     presence: 'offline',
     statusText: 'Offline - Back tomorrow',
     mutualServers: ['Developer Hangout', 'Gamer Zone'],
@@ -130,7 +130,7 @@ const mockUsers: { [id: string]: User } = {
   'farhan': {
     id: 'farhan',
     name: 'Farhan',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Farhan&topType=shortHair,sides,shavedSides,frizzle,shortWaved,dreads01,dreads02',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Farhan&topType=shortHairDreads01,shortHairDreads02,shortHairFrizzle,shortHairShaggy,shortHairShaggyMullet,shortHairShortCurly,shortHairShortFlat,shortHairShortRound,shortHairShortWashed,shortHairSides,shortHairTheCaesar,shortHairTheCaesarSidePart',
     presence: 'online',
     statusText: 'LFG Valorant / Minecraft 🎮',
     mutualServers: ['Developer Hangout', 'Gamer Zone'],
@@ -139,7 +139,7 @@ const mockUsers: { [id: string]: User } = {
   'gauri': {
     id: 'gauri',
     name: 'Gauri',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gauri&facialHairProbability=0&topType=longButNotTooLong,straightAndStrand,straight2,straight,curly,dreads,frida,bun,bob',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gauri&facialHairProbability=0&topType=longHairBigHair,longHairBob,longHairBun,longHairCurly,longHairCurvy,longHairDreads,longHairFrida,longHairFro,longHairFroBand,longHairNotTooLong,longHairMiaWallace,longHairStraight,longHairStraight2,longHairStraightStrand',
     presence: 'online',
     mutualServers: ['Developer Hangout'],
     role: 'Member'
@@ -147,7 +147,7 @@ const mockUsers: { [id: string]: User } = {
   'harshita': {
     id: 'harshita',
     name: 'Harshita',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Harshita&facialHairProbability=0&topType=longButNotTooLong,straightAndStrand,straight2,straight,curly,dreads,frida,bun,bob',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Harshita&facialHairProbability=0&topType=longHairBigHair,longHairBob,longHairBun,longHairCurly,longHairCurvy,longHairDreads,longHairFrida,longHairFro,longHairFroBand,longHairNotTooLong,longHairMiaWallace,longHairStraight,longHairStraight2,longHairStraightStrand',
     presence: 'idle',
     mutualServers: ['Developer Hangout'],
     role: 'Member'
@@ -155,7 +155,7 @@ const mockUsers: { [id: string]: User } = {
   'ishaan': {
     id: 'ishaan',
     name: 'Ishaan',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ishaan&topType=shortHair,sides,shavedSides,frizzle,shortWaved,dreads01,dreads02',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ishaan&topType=shortHairDreads01,shortHairDreads02,shortHairFrizzle,shortHairShaggy,shortHairShaggyMullet,shortHairShortCurly,shortHairShortFlat,shortHairShortRound,shortHairShortWashed,shortHairSides,shortHairTheCaesar,shortHairTheCaesarSidePart',
     presence: 'offline',
     mutualServers: ['Developer Hangout'],
     role: 'Member'
@@ -163,7 +163,7 @@ const mockUsers: { [id: string]: User } = {
   'jyoti': {
     id: 'jyoti',
     name: 'Jyoti',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jyoti&facialHairProbability=0&topType=longButNotTooLong,straightAndStrand,straight2,straight,curly,dreads,frida,bun,bob',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jyoti&facialHairProbability=0&topType=longHairBigHair,longHairBob,longHairBun,longHairCurly,longHairCurvy,longHairDreads,longHairFrida,longHairFro,longHairFroBand,longHairNotTooLong,longHairMiaWallace,longHairStraight,longHairStraight2,longHairStraightStrand',
     presence: 'online',
     mutualServers: ['Developer Hangout'],
     role: 'Member'
@@ -171,7 +171,7 @@ const mockUsers: { [id: string]: User } = {
   'meera': {
     id: 'meera',
     name: 'Meera',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Meera&facialHairProbability=0&topType=longButNotTooLong,straightAndStrand,straight2,straight,curly,dreads,frida,bun,bob',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Meera&facialHairProbability=0&topType=longHairBigHair,longHairBob,longHairBun,longHairCurly,longHairCurvy,longHairDreads,longHairFrida,longHairFro,longHairFroBand,longHairNotTooLong,longHairMiaWallace,longHairStraight,longHairStraight2,longHairStraightStrand',
     presence: 'idle',
     statusText: 'Moderating the community',
     mutualServers: ['Gamer Zone'],
@@ -180,7 +180,7 @@ const mockUsers: { [id: string]: User } = {
   'tushar': {
     id: 'tushar',
     name: 'Tushar',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tushar&topType=shortHair,sides,shavedSides,frizzle,shortWaved,dreads01,dreads02',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tushar&topType=shortHairDreads01,shortHairDreads02,shortHairFrizzle,shortHairShaggy,shortHairShaggyMullet,shortHairShortCurly,shortHairShortFlat,shortHairShortRound,shortHairShortWashed,shortHairSides,shortHairTheCaesar,shortHairTheCaesarSidePart',
     presence: 'offline',
     mutualServers: ['Gamer Zone'],
     role: 'Member'
@@ -188,7 +188,7 @@ const mockUsers: { [id: string]: User } = {
   'prisha': {
     id: 'prisha',
     name: 'Prisha',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Prisha&facialHairProbability=0&topType=longButNotTooLong,straightAndStrand,straight2,straight,curly,dreads,frida,bun,bob',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Prisha&facialHairProbability=0&topType=longHairBigHair,longHairBob,longHairBun,longHairCurly,longHairCurvy,longHairDreads,longHairFrida,longHairFro,longHairFroBand,longHairNotTooLong,longHairMiaWallace,longHairStraight,longHairStraight2,longHairStraightStrand',
     presence: 'idle',
     mutualServers: ['Gamer Zone'],
     role: 'Member'
@@ -196,7 +196,7 @@ const mockUsers: { [id: string]: User } = {
   'sneha': {
     id: 'sneha',
     name: 'Sneha',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha&facialHairProbability=0&topType=longButNotTooLong,straightAndStrand,straight2,straight,curly,dreads,frida,bun,bob',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha&facialHairProbability=0&topType=longHairBigHair,longHairBob,longHairBun,longHairCurly,longHairCurvy,longHairDreads,longHairFrida,longHairFro,longHairFroBand,longHairNotTooLong,longHairMiaWallace,longHairStraight,longHairStraight2,longHairStraightStrand',
     presence: 'dnd',
     mutualServers: ['Gamer Zone'],
     role: 'Member'
