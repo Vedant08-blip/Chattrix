@@ -1,6 +1,6 @@
 import React from 'react';
 import { useChatStore } from '../store';
-import { Menu, Hash, Megaphone, Search, Users, SidebarClose, SidebarOpen } from 'lucide-react';
+import { Menu, Hash, Megaphone, Search, Users, SidebarClose, SidebarOpen, X } from 'lucide-react';
 import type { Presence } from '../types';
 
 export const ChatHeader: React.FC = () => {
@@ -13,7 +13,9 @@ export const ChatHeader: React.FC = () => {
     communities,
     isRightPanelOpen,
     toggleRightPanel,
-    toggleMobileSidebar
+    toggleMobileSidebar,
+    searchQuery,
+    setSearchQuery
   } = useChatStore();
 
   const getPresenceColor = (presence: Presence) => {
@@ -100,15 +102,25 @@ export const ChatHeader: React.FC = () => {
 
       {/* Right side: Search + Toggle Right Sidebar button */}
       <div className="flex items-center gap-3.5 flex-shrink-0">
-        {/* Search Mockup */}
+        {/* Active Search Input */}
         <div className="relative hidden md:block">
           <input
             type="text"
-            placeholder="Search"
-            disabled
-            className="w-36 lg:w-60 bg-[#1e1f22] text-[#dbdee1] text-xs px-2 py-1.5 pr-8 rounded focus:outline-none placeholder-[#949ba4] border border-transparent cursor-not-allowed"
+            placeholder="Search active chat"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-36 lg:w-60 bg-[#1e1f22] text-[#dbdee1] text-xs px-2.5 py-1.5 pr-8 rounded focus:outline-none placeholder-[#949ba4] border border-transparent focus:border-[#5865f2] transition-colors"
           />
-          <Search className="w-3.5 h-3.5 text-[#949ba4] absolute right-2 top-2" />
+          {searchQuery ? (
+            <button 
+              onClick={() => setSearchQuery('')}
+              className="w-3.5 h-3.5 text-[#949ba4] hover:text-white absolute right-2 top-2 focus:outline-none"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          ) : (
+            <Search className="w-3.5 h-3.5 text-[#949ba4] absolute right-2 top-2 pointer-events-none" />
+          )}
         </div>
 
         {/* Member list toggle */}
