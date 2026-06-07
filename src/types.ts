@@ -44,7 +44,7 @@ export interface Message {
 export interface Channel {
   id: string;
   name: string;
-  type: 'text' | 'announcements';
+  type: 'text' | 'announcements' | 'voice';
   description: string;
 }
 
