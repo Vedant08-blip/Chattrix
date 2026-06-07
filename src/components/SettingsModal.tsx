@@ -261,10 +261,3 @@ export const SettingsModal: React.FC = () => {
     </div>
   );
 };
-
-        </div>
-
-      </div>
-    </div>
-  );
-};
