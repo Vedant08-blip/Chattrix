@@ -90,3 +90,62 @@ html, body, #root {
   transform: translateY(-50%) scale(1);
   height: 40px;
 }
+
+/* ================= THEMES ================= */
+
+/* AMOLED Black theme colors */
+.theme-amoled-black {
+  background-color: #000000 !important;
+}
+.theme-amoled-black .bg-\[\#1e1f22\] { background-color: #000000 !important; }
+.theme-amoled-black .bg-\[\#2b2d31\] { background-color: #050505 !important; }
+.theme-amoled-black .bg-\[\#313338\] { background-color: #000000 !important; }
+.theme-amoled-black .bg-\[\#232428\] { background-color: #090909 !important; }
+.theme-amoled-black .bg-\[\#383a40\] { background-color: #121212 !important; }
+.theme-amoled-black .bg-\[\#2f3136\] { background-color: #0f0f0f !important; }
+.theme-amoled-black .bg-\[\#404249\] { background-color: #1a1a1a !important; }
+.theme-amoled-black .hover\:bg-\[\#35373c\]:hover { background-color: #141414 !important; }
+.theme-amoled-black .hover\:bg-\[\#35373c\/30\]:hover { background-color: rgba(20, 20, 20, 0.3) !important; }
+.theme-amoled-black .border-\[\#1f2023\]\/60 { border-color: #111111 !important; }
+.theme-amoled-black .border-\[\#1f2023\]\/40 { border-color: #111111 !important; }
+.theme-amoled-black .border-\[\#1f2023\]\/30 { border-color: #111111 !important; }
+.theme-amoled-black .border-\[\#1f2023\]\/20 { border-color: #111111 !important; }
+.theme-amoled-black .border-\[\#1f2023\] { border-color: #111111 !important; }
+
+/* Forest Moss theme colors */
+.theme-forest-moss {
+  background-color: #0d1a0d !important;
+}
+.theme-forest-moss .bg-\[\#1e1f22\] { background-color: #0d1b11 !important; } /* deepest green */
+.theme-forest-moss .bg-\[\#2b2d31\] { background-color: #14281a !important; } /* sidebar green */
+.theme-forest-moss .bg-\[\#313338\] { background-color: #1a3322 !important; } /* main pane green */
+.theme-forest-moss .bg-\[\#232428\] { background-color: #0f2014 !important; } /* bottom bar green */
+.theme-forest-moss .bg-\[\#383a40\] { background-color: #22442d !important; } /* input box green */
+.theme-forest-moss .bg-\[\#2f3136\] { background-color: #1b3824 !important; } 
+.theme-forest-moss .bg-\[\#404249\] { background-color: #2b543a !important; } /* active channel */
+.theme-forest-moss .hover\:bg-\[\#35373c\]:hover { background-color: #244731 !important; }
+.theme-forest-moss .hover\:bg-\[\#35373c\/30\]:hover { background-color: rgba(36, 71, 49, 0.3) !important; }
+.theme-forest-moss .border-\[\#1f2023\]\/60 { border-color: #102517 !important; }
+.theme-forest-moss .border-\[\#1f2023\]\/40 { border-color: #102517 !important; }
+.theme-forest-moss .border-\[\#1f2023\]\/30 { border-color: #102517 !important; }
+.theme-forest-moss .border-\[\#1f2023\]\/20 { border-color: #102517 !important; }
+.theme-forest-moss .border-\[\#1f2023\] { border-color: #102517 !important; }
+
+/* Crimson Night theme colors */
+.theme-crimson-night {
+  background-color: #1c0909 !important;
+}
+.theme-crimson-night .bg-\[\#1e1f22\] { background-color: #1a0808 !important; } /* deepest red */
+.theme-crimson-night .bg-\[\#2b2d31\] { background-color: #240c0c !important; } /* sidebar red */
+.theme-crimson-night .bg-\[\#313338\] { background-color: #2d1010 !important; } /* main pane red */
+.theme-crimson-night .bg-\[\#232428\] { background-color: #1f0a0a !important; } /* bottom bar red */
+.theme-crimson-night .bg-\[\#383a40\] { background-color: #3b1717 !important; } /* input box red */
+.theme-crimson-night .bg-\[\#2f3136\] { background-color: #311313 !important; } 
+.theme-crimson-night .bg-\[\#404249\] { background-color: #521c1c !important; } /* active channel */
+.theme-crimson-night .hover\:bg-\[\#35373c\]:hover { background-color: #401616 !important; }
+.theme-crimson-night .hover\:bg-\[\#35373c\/30\]:hover { background-color: rgba(64, 22, 22, 0.3) !important; }
+.theme-crimson-night .border-\[\#1f2023\]\/60 { border-color: #220707 !important; }
+.theme-crimson-night .border-\[\#1f2023\]\/40 { border-color: #220707 !important; }
+.theme-crimson-night .border-\[\#1f2023\]\/30 { border-color: #220707 !important; }
+.theme-crimson-night .border-\[\#1f2023\]\/20 { border-color: #220707 !important; }
+.theme-crimson-night .border-\[\#1f2023\] { border-color: #220707 !important; }
