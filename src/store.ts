@@ -14,6 +14,14 @@ interface AppState {
   activeCommunityId: string | null;
   activeChannelId: string | null;
 
+  // Voice Select
+  activeVoiceChannelId: string | null;
+  searchQuery: string;
+  isMuted: boolean;
+  isDeafened: boolean;
+  userProfileModalId: string | null;
+  isSettingsModalOpen: boolean;
+
   // View States
   viewMode: 'dms' | 'community';
   isRightPanelOpen: boolean;
@@ -43,6 +51,15 @@ interface AppState {
   toggleMobileSidebar: (isOpen?: boolean) => void;
   toggleAdminMode: () => void;
   simulateTyping: (chatKey: string, isTyping: boolean) => void;
+
+  connectVoice: (channelId: string) => void;
+  disconnectVoice: () => void;
+  setSearchQuery: (query: string) => void;
+  toggleMute: () => void;
+  toggleDeafen: () => void;
+  setUserProfileModalId: (userId: string | null) => void;
+  setSettingsModalOpen: (isOpen: boolean) => void;
+  updateUserProfile: (name: string, statusText: string, avatar: string) => void;
 }
 
 // Helper to generate IDs
@@ -181,7 +198,10 @@ const mockCommunities: Community[] = [
       { id: 'dh_welcome', name: 'welcome-rules', type: 'announcements', description: 'Welcome guidelines and general rules for developers.' },
       { id: 'dh_general', name: 'general-chat', type: 'text', description: 'General coding talks, banter and networking.' },
       { id: 'dh_react_vite', name: 'react-vite', type: 'text', description: 'Everything React, Vite, Tailwind and general frontend framework queries.' },
-      { id: 'dh_random', name: 'random-memes', type: 'text', description: 'Share interesting links, jokes, and funny memes.' }
+      { id: 'dh_random', name: 'random-memes', type: 'text', description: 'Share interesting links, jokes, and funny memes.' },
+      { id: 'dh_lounge', name: 'Lounge 🎙️', type: 'voice', description: 'General voice channel for developers to hang out.' },
+      { id: 'dh_gaming', name: 'Gaming Room 🎮', type: 'voice', description: 'Hop in to play games together while coding.' },
+      { id: 'dh_pair', name: 'Pair Programming 💻', type: 'voice', description: 'Collaborate and review code with screenshare.' }
     ],
     members: ['dave', 'alice', 'charlie', 'eve', 'frank', 'grace', 'heidi', 'ivan', 'judy']
   },
@@ -192,7 +212,9 @@ const mockCommunities: Community[] = [
     channels: [
       { id: 'gz_announcements', name: 'announcements', type: 'announcements', description: 'Tournament brackets, rule revisions, and server news.' },
       { id: 'gz_lfg', name: 'lfg-chat', type: 'text', description: 'Looking for group: Drop your lobbies and find players!' },
-      { id: 'gz_clips', name: 'clips-and-highlights', type: 'text', description: 'Share your clutch moments and epic gaming clips.' }
+      { id: 'gz_clips', name: 'clips-and-highlights', type: 'text', description: 'Share your clutch moments and epic gaming clips.' },
+      { id: 'gz_voice', name: 'General Voice 🔊', type: 'voice', description: 'Hang out and voice chat about anything gaming.' },
+      { id: 'gz_squad', name: 'Squad Up 🔫', type: 'voice', description: 'In-game comms for active tournament lobbies.' }
     ],
     members: ['mallory', 'alice', 'bob', 'eve', 'frank', 'trent', 'peggy', 'sybil']
   }
@@ -682,6 +704,13 @@ export const useChatStore = create<AppState>((set) => ({
   activeCommunityId: null,
   activeChannelId: null,
 
+  activeVoiceChannelId: null,
+  searchQuery: '',
+  isMuted: false,
+  isDeafened: false,
+  userProfileModalId: null,
+  isSettingsModalOpen: false,
+
   viewMode: 'dms',
   isRightPanelOpen: true,
   isMobileSidebarOpen: false,
@@ -919,5 +948,27 @@ export const useChatStore = create<AppState>((set) => ({
         [chatKey]: updatedTypers
       }
     };
-  })
+  }),
+
+  connectVoice: (channelId) => set({ activeVoiceChannelId: channelId }),
+  disconnectVoice: () => set({ activeVoiceChannelId: null }),
+  setSearchQuery: (query) => set({ searchQuery: query }),
+  toggleMute: () => set((state) => ({ isMuted: !state.isMuted })),
+  toggleDeafen: () => set((state) => {
+    const nextDeafen = !state.isDeafened;
+    return {
+      isDeafened: nextDeafen,
+      isMuted: nextDeafen ? true : state.isMuted
+    };
+  }),
+  setUserProfileModalId: (userId) => set({ userProfileModalId: userId }),
+  setSettingsModalOpen: (isOpen) => set({ isSettingsModalOpen: isOpen }),
+  updateUserProfile: (name, statusText, avatar) => set((state) => ({
+    currentUser: {
+      ...state.currentUser,
+      name,
+      avatar,
+      statusText
+    }
+  }))
 }));
